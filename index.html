@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" href="css/styles.css">
     <meta charset="utf-8">
-    <title>Timey Wimey</title>
+    <title>Temporal Temptation</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -16,13 +16,19 @@
     <div class="line"></div>
 
     <p id="balance">Balance: $0</p>
-    <p id="debt">Debt: $0</p>
+    <p id="debt">Latest Debt: $0 | Due: 0</p>
+    <p id="totalDebt">Total Debt: $0</p>
     <button onclick="borrow()" id="borrow">Borrow: $10</button>
 
     <div class="line"></div>
 
     <p id="producers">Producers: 0</p>
     <button onclick="buy()" id="buy">Buy Producer: $10</button>
+    
+    <div class="line"></div>
+    
+    <button onclick="toggleTime()" id="autoTime">Auto Time: True</button>
+    <button onclick="addTime()">Increment Time</button>
 
     <script src="js/main.js"></script>
 </body>

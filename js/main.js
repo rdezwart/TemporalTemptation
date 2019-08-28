@@ -115,7 +115,7 @@ function debtCheck() {
         "<tr><th>Debt #</th><th>Amount</th><th>Due In</th><th>Forecast</th>";
     for (var i = 0; i < gameData.debt.length; i++) {
         html += "<tr>";
-        html += "<td>" + "#" + i + "</td>";
+        html += "<td>" + "#" + (i+1) + "</td>";
         html += "<td>$" + gameData.debt[i].amount.toFixed(2) + "</td>";
         html += "<td>" + (gameData.debt[i].due - gameData.time) + "s</td>";
 

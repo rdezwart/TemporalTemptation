@@ -12,8 +12,10 @@ function init() {
 
 
 var gameData = {
+    frame: 0,
     time: 0,
     autoTime: true,
+    ticks: 10,
 
     money: 0,
     debt: [],
@@ -24,7 +26,8 @@ var gameData = {
     producers: 0,
     producerCost: 10,
     production: 0,
-    
+    gain: 0.00,
+
     clockyWealth: 0
 };
 
@@ -39,7 +42,7 @@ function getDebt(index, type) {
     var isDebt = gameData.debt.length != 0;
 
     if (type === 'string') {
-        ret = "Debt: $" + ((isDebt) ? gameData.debt[index].amount : 0).toFixed(2) + " | Due: " + ((isDebt) ? gameData.debt[index].due : 0).toFixed(2);
+        ret = "Debt: $" + ((isDebt) ? gameData.debt[index].amount : 0).toFixed(2) + " | Due: " + ((isDebt) ? gameData.debt[index].due - gameData.time : 0).toFixed(2);
     } else if (type === 'object') {
         ret = ((isDebt) ? gameData.debt[index] : null);
     }
@@ -69,6 +72,8 @@ function toggleTime() {
 }
 
 function addTime() {
+    tickLoop('manual');
+
     timeLoop('manual');
 }
 
@@ -111,6 +116,8 @@ function buy() {
 
         gameData.producers += 1;
         gameData.production += 0.5;
+        //        gameData.production = Math.sqrt(gameData.producers);
+
         gameData.producerCost *= 1.5;
     }
 }
@@ -120,7 +127,7 @@ function updateText() {
     $("#autoTime").text("Auto Time: " + gameData.autoTime);
 
     $("#balance").text("Balance: $" + gameData.money.toFixed(2));
-    $("#production").text("Production: $" + gameData.production.toFixed(2));
+    $("#production").text("Total Production: $" + gameData.gain.toFixed(2));
     $("#debt").text("Latest " + getDebt(gameData.debt.length - 1, 'string'));
     $("#totalDebt").text("Total Debt: $" + gameData.totalDebt.toFixed(2));
     $("#borrow").text("Borrow: $" + gameData.borrowAmount.toFixed(2));
@@ -138,21 +145,33 @@ $(document).ready(function () {
     init();
 
     if (debug) console.log("Loops Started");
-    var tick = window.setInterval(tickLoop, 10, 'interval');
-    var time = window.setInterval(timeLoop, 1000, 'interval');
+    var tick = window.setInterval(tickLoop, gameData.ticks * 10, 'interval');
 });
 
 function tickLoop(source) {
+    gameData.frame++;
     debtCheck();
+
+
+    if (source === 'interval' && !gameData.autoTime) {
+        // do nothing
+    } else {
+        if (gameData.money < 0) {
+            gameData.gain = gameData.production / (1 + Math.abs(gameData.money));
+        } else {
+            gameData.gain = gameData.production;
+        }
+
+        gameData.money += gameData.gain / gameData.ticks;
+
+        if (gameData.frame % 10 === 0) {
+            timeLoop();
+        }
+    }
 
     updateText();
 }
 
-function timeLoop(source) {
-    if (source === 'interval' && !gameData.autoTime) {
-        return;
-    }
-
+function timeLoop() {
     gameData.time += 1;
-    gameData.money += gameData.production;
 }

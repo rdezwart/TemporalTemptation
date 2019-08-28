@@ -19,6 +19,7 @@ var gameData = {
 
     money: 0,
     debt: [],
+    debtNum: 1,
     totalDebt: 0,
     borrowAmount: 10,
     interest: 1.01,
@@ -108,21 +109,22 @@ function debtCheck() {
         gameData.totalDebt = 0;
     }
 
-
-    var html = "<table border='1|1'>" + 
-        "<tr><th>Debt #</th><th>Amount</th><th>Due In</th>";
+    // visual table
+    var html = "<table border='1|1'>" +
+        "<tr><th>Debt #</th><th>Amount</th><th>Due In</th><th>Forecast</th>";
     for (var i = 0; i < gameData.debt.length; i++) {
         html += "<tr>";
         html += "<td>" + "#" + i + "</td>";
         html += "<td>$" + gameData.debt[i].amount.toFixed(2) + "</td>";
         html += "<td>" + (gameData.debt[i].due - gameData.time) + "s</td>";
 
-        html += "</tr>";
+        var forecast = (gameData.money + (gameData.debt[i].due * gameData.gain) - gameData.debt[i].amount) > 0;
+        html += "<td>" + ((forecast) ? "=)" : "=(") + "</td>";
 
+        html += "</tr>";
     }
     html += "</table>";
     document.getElementById("box").innerHTML = html;
-
 }
 
 function buy() {

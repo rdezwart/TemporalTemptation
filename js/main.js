@@ -54,7 +54,8 @@ function getDebt(index, type) {
 function newDebt(_amount, _due) {
     var newDebt = {
         amount: _amount * gameData.interest,
-        due: gameData.time + _due
+        due: gameData.time + _due,
+        duration: _due
     };
 
     return newDebt;
@@ -118,7 +119,7 @@ function debtCheck() {
         html += "<td>$" + gameData.debt[i].amount.toFixed(2) + "</td>";
         html += "<td>" + (gameData.debt[i].due - gameData.time) + "s</td>";
 
-        var forecast = (gameData.money + (gameData.debt[i].due * gameData.gain) - gameData.debt[i].amount) > 0;
+        var forecast = (gameData.money + ((gameData.debt[i].due - gameData.time) * gameData.gain) - gameData.debt[i].amount) > 0;
         html += "<td>" + ((forecast) ? "=)" : "=(") + "</td>";
 
         html += "</tr>";

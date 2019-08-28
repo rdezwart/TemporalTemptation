@@ -19,10 +19,13 @@ var gameData = {
     debt: [],
     totalDebt: 0,
     borrowAmount: 10,
+    interest: 1.1,
 
     producers: 0,
     producerCost: 10,
-    production: 0
+    production: 0,
+    
+    clockyWealth: 0
 };
 
 var debug = true;
@@ -46,7 +49,7 @@ function getDebt(index, type) {
 
 function newDebt(_amount, _due) {
     var newDebt = {
-        amount: _amount,
+        amount: _amount * gameData.interest,
         due: gameData.time + _due
     };
 
@@ -107,7 +110,7 @@ function buy() {
         gameData.money -= gameData.producerCost;
 
         gameData.producers += 1;
-        gameData.production += 1;
+        gameData.production += 0.5;
         gameData.producerCost *= 1.5;
     }
 }
@@ -117,6 +120,7 @@ function updateText() {
     $("#autoTime").text("Auto Time: " + gameData.autoTime);
 
     $("#balance").text("Balance: $" + gameData.money.toFixed(2));
+    $("#production").text("Production: $" + gameData.production.toFixed(2));
     $("#debt").text("Latest " + getDebt(gameData.debt.length - 1, 'string'));
     $("#totalDebt").text("Total Debt: $" + gameData.totalDebt.toFixed(2));
     $("#borrow").text("Borrow: $" + gameData.borrowAmount.toFixed(2));

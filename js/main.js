@@ -42,7 +42,7 @@ function getDebt(index, type) {
     var isDebt = gameData.debt.length != 0;
 
     if (type === 'string') {
-        ret = "Debt: $" + ((isDebt) ? gameData.debt[index].amount : 0).toFixed(2) + " | Due: " + ((isDebt) ? gameData.debt[index].due - gameData.time : 0).toFixed(2);
+        ret = "Debt: $" + ((isDebt) ? gameData.debt[index].amount : 0).toFixed(2) + " | Due In: " + ((isDebt) ? gameData.debt[index].due - gameData.time : 0).toFixed(0) + "s";
     } else if (type === 'object') {
         ret = ((isDebt) ? gameData.debt[index] : null);
     }
@@ -117,7 +117,7 @@ function buy() {
         gameData.producers += 1;
         gameData.production = Math.sqrt(gameData.producers);
 
-        gameData.producerCost *= 1.5;
+        gameData.producerCost *= 1.15;
     }
 }
 

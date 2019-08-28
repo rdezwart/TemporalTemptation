@@ -11,25 +11,45 @@
 </head>
 
 <body>
-    <p id="time">Time: 0</p>
+    <div id="left">
+        <p id="time">Time: 0</p>
 
-    <div class="line"></div>
+        <div class="line"></div>
 
-    <p id="balance">Balance: $0</p>
-    <p id="production">Total Production: $0</p>
-    <p id="debt">Latest Debt: $0 | Due: 0</p>
-    <p id="totalDebt">Total Debt: $0</p>
-    <button onclick="borrow()" id="borrow">Borrow: $10</button>
+        <p id="balance">Balance: $0</p>
+        <p id="production">Total Production: $0</p>
+        <p id="debt">Latest Debt: $0 | Due: 0</p>
+        <p id="totalDebt">Total Debt: $0</p>
+        <button onclick="borrow()" id="borrow">Borrow: $10</button>
 
-    <div class="line"></div>
+        <div class="line"></div>
 
-    <p id="producers">Producers: 0</p>
-    <button onclick="buy()" id="buy">Buy Producer: $10</button>
+        <p id="producers">Producers: 0</p>
+        <button onclick="buy()" id="buy">Buy Producer: $10</button>
+
+        <div class="line"></div>
+
+        <button onclick="toggleTime()" id="autoTime">Auto Time: True</button>
+        <button onclick="addTime()">Increment Time</button>
+    </div>
     
-    <div class="line"></div>
-    
-    <button onclick="toggleTime()" id="autoTime">Auto Time: True</button>
-    <button onclick="addTime()">Increment Time</button>
+    <div id="right">
+        <div class="line"></div>
+        
+        <table>
+            <tr>
+                <th>Debt #</th>
+                <th>Amount</th>
+                <th>Total Time</th>
+            </tr>
+            <tr>
+                <td>#1</td>
+                <td>$0</td>
+                <td>0</td>
+            </tr>
+        </table>
+    </div>
+
 
     <script src="js/main.js"></script>
 </body>

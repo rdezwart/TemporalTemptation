@@ -111,7 +111,7 @@ function debtCheck() {
     }
 
     // visual table
-    var html = "<table border='1|1'>" +
+    var html = "<table>" +
         "<tr><th>Debt #</th><th>Amount</th><th>Due In</th><th>Forecast</th>";
     for (var i = 0; i < gameData.debt.length; i++) {
         html += "<tr>";

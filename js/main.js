@@ -21,7 +21,7 @@ var gameData = {
     debt: [],
     totalDebt: 0,
     borrowAmount: 10,
-    interest: 1.1,
+    interest: 1.01,
 
     producers: 0,
     producerCost: 10,

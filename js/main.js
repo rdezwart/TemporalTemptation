@@ -19,7 +19,7 @@ var gameData = {
 
     money: 0,
     debt: [],
-    debtNum: 1,
+    debtNum: 3,
     totalDebt: 0,
     borrowAmount: 10,
     interest: 1.01,
@@ -126,6 +126,13 @@ function debtCheck() {
     }
     html += "</table>";
     document.getElementById("box").innerHTML = html;
+    
+    // button
+    if (gameData.debt.length < gameData.debtNum) {
+        $("#borrow").prop('disabled', false);
+    } else {
+        $("#borrow").prop('disabled', true);
+    }
 }
 
 function buy() {

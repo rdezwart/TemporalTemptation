@@ -1,14 +1,14 @@
 .line {
     height: 5px;
     background-color: #aaa;
-    
+
     margin: 30px 0px;
 }
 
 #left {
     width: 45%;
     position: absolute;
-    
+
     top: 10px;
     left: 10px;
 }
@@ -16,11 +16,24 @@
 #right {
     width: 45%;
     position: absolute;
-    
+
     top: 10px;
     right: 10px;
 }
 
-th, td {
-    padding: 5px;
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 15px;
+}
+
+table {
+    width: 100%;
+
 }

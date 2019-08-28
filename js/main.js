@@ -108,6 +108,21 @@ function debtCheck() {
         gameData.totalDebt = 0;
     }
 
+
+    var html = "<table border='1|1'>" + 
+        "<tr><th>Debt #</th><th>Amount</th><th>Due In</th>";
+    for (var i = 0; i < gameData.debt.length; i++) {
+        html += "<tr>";
+        html += "<td>" + "#" + i + "</td>";
+        html += "<td>$" + gameData.debt[i].amount.toFixed(2) + "</td>";
+        html += "<td>" + (gameData.debt[i].due - gameData.time) + "s</td>";
+
+        html += "</tr>";
+
+    }
+    html += "</table>";
+    document.getElementById("box").innerHTML = html;
+
 }
 
 function buy() {
@@ -163,7 +178,7 @@ function tickLoop(source) {
 
         gameData.money += gameData.gain / gameData.ticks;
 
-        if (gameData.frame % 10 === 0) {
+        if (gameData.frame % gameData.ticks === 0) {
             timeLoop();
         }
     }

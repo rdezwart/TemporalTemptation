@@ -115,8 +115,7 @@ function buy() {
         gameData.money -= gameData.producerCost;
 
         gameData.producers += 1;
-        gameData.production += 0.5;
-        //        gameData.production = Math.sqrt(gameData.producers);
+        gameData.production = Math.sqrt(gameData.producers);
 
         gameData.producerCost *= 1.5;
     }
